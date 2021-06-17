@@ -2,6 +2,8 @@
 header{
     text-align: center;
     background-image: url('img/back-ground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     
 }
 header h2{
@@ -9,4 +11,16 @@ header h2{
 }
 .total{
     font-size: 2rem;
+}
+ .inc{
+    color: rgb(31, 128, 111);
+}
+.exp{
+    color: rgb(153, 48, 28);
+}
+.incStyle{
+    color: rgb(87, 150, 138);
+}
+.expStyle{
+    color: rgb(153, 78, 63);
 }

@@ -17,24 +17,58 @@
                     <div class="pb-2 bg1 mb-3"><span>income</span> <span>+0.00</span></div>
                     <div class="pb-2 bg2"><span>expenses</span> <span>+0.00</span></div>
                 </header>
-              <div class="bottom pt-3 justify-content-evenly">
-                  <div class="add row">
-                     <div class="add-container col-md-2">
+              <div class="bottom pt-3">
+                  <div class="add row justify-content-center">
+                     <div class="add-container col-md-1">
                          <select id="add-type" class=" form-select ">
                              <option value="inc" selected>+</option>
                              <option value="exp" >-</option>
                          </select>
                      </div>
-                     <div class="add-container col-md-4">
+                     <div class="add-container col-md-5">
                          <input type="text" class="add-desc form-control" placeholder="add description"/>
                      </div>
-                     <div class="add-container col-md-3">
+                     <div class="add-container col-md-2">
                         <input type="number" class="add-value form-control" placeholder="value"/>
                     </div>
                     <div class="add-container col-md-1">
                         <button  class="btn btn-outline-success add-btn"><i class="far fa-check-circle"></i></button>
                     </div>
                   </div>
+              </div>
+              <hr>
+              <div class="row">
+                  <div class="col-md-6">
+                      <h4 class="inc">incomes</h4>
+                     
+                          <table class="table  table-striped">
+                              <tbody class="incTable">
+                                <!--will come from the java script-->
+                              <!-- <tr>
+                                <td class="incStyle">Mark</td>
+                                <td class="incStyle">mjjj</td>
+                                <td><button class="btn btn-outline-info ml-3"><i class="fas fa-times"></i></button></td>
+                              </tr> -->
+                            </tbody>
+                          </table>
+                      
+                  </div>
+                  <div class="col-md-6">
+                    <h4 class="exp">expenses</h4>
+                   
+                        <table class="table  table-striped">
+                            <tbody class="expTable">
+                            <!--will come from the java script-->
+                          <!-- <tr>
+                            <td class="expStyle">Mark</td>
+                            <td class="expStyle">mjjj</td>
+                            <td><button class="btn btn-outline-danger ml-3"><i class="fas fa-times"></i></button></td>
+                          </tr> -->
+                        </tbody>
+                      </table>
+                   
+                </div>
+
               </div>
             </div>
         </div>
