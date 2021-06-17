@@ -1,0 +1,12 @@
+
+header{
+    text-align: center;
+    background-image: url('img/back-ground.jpg');
+    
+}
+header h2{
+    color: rgb(83, 82, 82);
+}
+.total{
+    font-size: 2rem;
+}
