@@ -17,6 +17,15 @@ var budgetController = (function(){
         this.description=description;
         this.value=value;
     };
+    //calculate income and expenses 
+    var calcTotal=function(type){
+        var sum = 0;
+        data.allItems[type].forEach(function(cur){
+            sum += cur.value;
+        });
+        data.totals[type] = sum ;
+
+    }
     //make the arrays in obj to be easy to push data on it
     var data={
         allItems:{
@@ -26,7 +35,9 @@ var budgetController = (function(){
         totals:{
             exp:0,
             inc:0
-        }
+        },
+        budget:0 ,
+        percentage:0
     };
     //to take data from user and push it to the array
     return{
@@ -50,6 +61,16 @@ var budgetController = (function(){
             data.allItems[type].push(newItem);
             return newItem;
         } ,
+         calcbudget:function(){
+             //calc total inc , exp
+            calcTotal('inc');
+            calcTotal('exp');
+            //calc budget 
+            data.budget = data.totals.inc - data.totals.exp ;
+            //calc percentage 
+            data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
+
+         },
         test:function(){
             console.log(data);
         }
@@ -76,7 +97,8 @@ var UIcontrller = (function (){
             return{
             type : document.getElementById(domInputs.type).value,
             description : document.querySelector(domInputs.description).value,
-            value : document.querySelector(domInputs.value).value
+            //convert this string value to a number for calc
+            value : parseFloat(document.querySelector(domInputs.value).value)
             };
         },
         //to access the data in domInputs outside the uicontroller
@@ -99,6 +121,21 @@ var UIcontrller = (function (){
             newHtml = newHtml.replace('%value%' , obj.value);
 
             document.querySelector(element).insertAdjacentHTML('beforeend',newHtml);
+        },
+        //clear input fields
+        clearInputs:function(){
+            var inputs ,arrInputs;
+            
+            inputs=document.querySelectorAll(domInputs.description +','+ domInputs.value);
+            //query Selector all retrive a list 
+            //so we did a trick here to convert that list to an array 
+            //for easy looping :)
+            arrInputs = Array.prototype.slice.call(inputs);
+
+            arrInputs.forEach(function(current,index,array){
+                current.value="";
+            });
+            arrInputs[0].focus();
         }
     };
 
@@ -124,12 +161,20 @@ var controller = (function (budgetCtrl,UIctrl){
         //get the data
          input = UIctrl.getInputs();
          //console.log(input);
-         //add the data 
-         newItem = budgetCtrl.addItem(input.type , input.description , input.value);
-        // console.log(newItem);
-        UIctrl.addTableItems(newItem , input.type);
-
+         //check data to be sure that's not empty fields
+         if(input.description !== "" && !isNaN(input.value) && input.value > 0){
+              //add the data 
+             newItem = budgetCtrl.addItem(input.type , input.description , input.value);
+             // console.log(newItem);
+             UIctrl.addTableItems(newItem , input.type);
+             UIctrl.clearInputs();
+         }
     };
+    //calc budget
+    var updateBudget = function() {
+        budgetController.calcbudget();
+    } ;
+
     //to make the eventlisner fuction accesable (public)
     return {
         init :function(){
